@@ -30,7 +30,7 @@ Things you may want to cover:
 |------|----|-------|
 |email|string|null: false|
 |password|string|null: fals|
-|username|string|null: false|
+|name|string|null: false|
 ### Association
 has_many :messages
 has_many :groups_users
@@ -50,7 +50,7 @@ belongs_to :user
 ## groupesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|group_name|string|null: false, unique: true|
+|name|string|null: false, unique: true|
 
 ### Association
 has_many :groups_users
