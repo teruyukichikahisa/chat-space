@@ -1,0 +1,33 @@
+.main
+  .main__header
+    .main__header__right-box
+      .main__header__right-box__groupname team_b
+      .main__header__right-box__menber-list Menber: chikahisa
+    .main__header__edit-btn Edit
+  .main__messages
+    .main__messages__messagebox
+      .main__messages__messagebox__upper
+        .main__messages__messagebox__upper__name
+          aiueo
+        .main__messages__messagebox__upper__date
+          2020/05/22(FRI)
+      .main__messages__messagebox__lower
+        こんにちは
+
+    .main__messages__messagebox
+      .main__messages__messagebox__upper
+        .main__messages__messagebox__upper__name
+          chikahisa
+        .main__messages__messagebox__upper__date
+          2020/05/22(FRI)
+      .main__messages__messagebox__lower
+        こんにちは
+
+  .main__form
+    %form.new-message
+      .contents
+        %input.contents__text{placeholder:"type a message", type:"text_area"}
+        %label.contents__picture
+          = icon('far','image')
+          %input.contents__picture__file{type: "file"}
+      %input.send{type: "submit", value:"Send"}
