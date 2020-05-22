@@ -1,18 +1,22 @@
 .left-header
- .side-header
-  .side-header__box
-   %p.side-header__box__name
-    masa
-   %ul.side-header__box__menu
-    %li.side-header__box__edit-user
-     = link_to "#" do
-      = icon('fas','edit')
-    %li.side-header__box__new-group
-     = link_to "#" do
-      = icon('fas','cog')
- .group-list
-  = link_to "#", class:"group" do
-   %p.group__group-name
-    techcamp
-   %p.group__latest-message
-    まだメッセージがありません 
+  .side-header
+    .side-header__box
+      %p.side-header__box__name chikahisa
+      %ul.side-header__box__menu
+        %li.side-header__box__edit-user
+          = link_to "#" do
+            = icon('fas','edit')
+        %li.side-header__box__new-group
+          = link_to "#" do
+            = icon('fas','cog')
+      
+
+  .left-header__groups
+    = link_to "#" do
+      .left-header__groups--group
+        %p.group-name techcamp
+        %p.group-message 新着メッセージはありません
+    = link_to "#" do
+      .left-header__groups--group
+        %p.group-name techcamp
+        %p.group-message 新着メッセージはありません
