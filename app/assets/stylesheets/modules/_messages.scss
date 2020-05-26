@@ -93,9 +93,9 @@
       line-height: 40px;
       border: 1px solid #38aef0;
       font-size: 16px;
-      color: #38aef0;
       cursor: pointer;
       a {
+        color: #38aef0;
         text-decoration: none;
       }
     }
@@ -121,9 +121,16 @@
           margin-left: 10px;
         }
       }
-      &__lower {
+      &__lower-message {
         color: #434A54;
         font-size: 14px;
+        &__content {
+          margin-top: 10px;
+          margin-bottom: 40px;
+        }
+        &__image {
+          object-fit: cover;
+        }
       }
     }
   }
@@ -154,9 +161,9 @@
           position: absolute;
           right: 10px;
           line-height: 50px;
+          cursor: pointer;
           &__file {
             display: none;
-            cursor: pointer;
           }
         }
       }
@@ -168,6 +175,7 @@
         border: none;
         padding: 0 30px;
         margin-left: 15px;
+        cursor: pointer;
       }
     }
   }
