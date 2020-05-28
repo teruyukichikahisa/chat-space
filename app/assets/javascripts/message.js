@@ -2,7 +2,7 @@ $(function(){
     function buildHTML(message){
       if ( message.image ) {
         var html =
-          `<div class="main__message__messagebox">
+          `<div class="main__message__messagebox" data-message-id=${message.id}>
             <div class="main__messages__messagebox__upper">
               <div class="main__messages__messagebox__upper__name">
                 ${message.user_name}
@@ -21,7 +21,7 @@ $(function(){
         return html;
       } else {
         var html =
-          `<div class="main__message__messagebox">
+          `<div class="main__message__messagebox" data-message-id=${message.id}>
             <div class="main__messages__messagebox__upper">
               <div class="main__messages__messagebox__upper__name">
                 ${message.user_name}
@@ -39,27 +39,55 @@ $(function(){
         return html;
       };
     }
-$('#new_message').on('submit', function(e){
-    e.preventDefault();
-    var formData = new FormData(this);
-    var url = $(this).attr('action')
+  $('#new_message').on('submit', function(e){
+      e.preventDefault();
+      var formData = new FormData(this);
+      var url = $(this).attr('action')
+      $.ajax({
+        url: url,
+        type: "POST",
+        data: formData,
+        dataType: 'json',
+        processData: false,
+        contentType: false
+      })
+      .done(function(data){
+        var html = buildHTML(data);
+        $('.main__messages').append(html);
+        $('.new-message')[0].reset();
+        $(".send").prop("disabled", false);
+        $('.main__messages').animate({ scrollTop: $('.main__messages')[0].scrollHeight});
+
+      })
+      .fail(function(){
+        alert("メッセージ送信に失敗しました");
+      });
+  })
+  
+  var reloadMessages = function() {
+    var last_message_id = $('.main__message:last').data("message-id");
     $.ajax({
-      url: url,
-      type: "POST",
-      data: formData,
+      url: "api/messages",
+      type: 'get',
       dataType: 'json',
-      processData: false,
-      contentType: false
+      data: {id: last_message_id}
     })
-    .done(function(data){
-      var html = buildHTML(data);
-      $('.main__messages').append(html);
-      $('form')[0].reset();
-      $("input").prop("disabled", false);
-      $('.main__messages').animate({ scrollTop: $('.main__messages')[0].scrollHeight});
+    .done(function(messages) {
+      if (messages.length !== 0) {
+        var insertHTML = '';
+        $.each(messages, function(i, message) {
+          insertHTML += buildHTML(message)
+        });
+        $('.main__messages').append(insertHTML);
+        $('.main__messages').animate({ scrollTop: $('.main__messages')[0].scrollHeight});
+        
+      }
     })
-    .fail(function(){
-      alert("メッセージ送信に失敗しました");
+    .fail(function() {
+      alert('error');
     });
-})
+  };
+      if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+        setInterval(reloadMessages, 7000);
+      }
 });
