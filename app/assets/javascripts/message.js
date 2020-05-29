@@ -2,13 +2,13 @@ $(function(){
     function buildHTML(message){
       if ( message.image ) {
         var html =
-          `<div class="main__message__messagebox" data-message-id=${message.id}>
+          `<div class="main__messages__messagebox" data-message-id=${message.id}>
             <div class="main__messages__messagebox__upper">
               <div class="main__messages__messagebox__upper__name">
                 ${message.user_name}
               </div>
               <div class="main__messages__messagebox__upper__date">
-                ${message.crested_at}
+                ${message.created_at}
               </div>
             </div>
             <div class="main__messages__messagebox__lower">
@@ -21,7 +21,7 @@ $(function(){
         return html;
       } else {
         var html =
-          `<div class="main__message__messagebox" data-message-id=${message.id}>
+          `<div class="main__messages__messagebox" data-message-id=${message.id}>
             <div class="main__messages__messagebox__upper">
               <div class="main__messages__messagebox__upper__name">
                 ${message.user_name}
@@ -53,6 +53,7 @@ $(function(){
       })
       .done(function(data){
         var html = buildHTML(data);
+        console.log(html)
         $('.main__messages').append(html);
         $('.new-message')[0].reset();
         $(".send").prop("disabled", false);
@@ -65,7 +66,7 @@ $(function(){
   })
   
   var reloadMessages = function() {
-    var last_message_id = $('.main__message__messagebox:last').data("message-id");
+    var last_message_id = $('.main__messages__messagebox:last').data("message-id");
     $.ajax({
       url: "api/messages",
       type: 'get',
