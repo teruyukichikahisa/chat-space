@@ -13,12 +13,6 @@
         Edit
   .main__messages
     = render @messages
-    .main__messages__messagebox
-      .main__messages__messagebox__upper
-        .main__messages__messagebox__upper__name
-        .main__messages__messagebox__upper__date
-      .main__messages__messagebox__lower
-
   .main__form
     = form_for [@group, @message], html:{class:"new-message"} do |f|
       .contents
